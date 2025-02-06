@@ -7,7 +7,6 @@ function Analysis() {
     const [selectedLanguage, setSelectedLanguage] = useState("");
     const [imageFile, setImageFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [uuidCode, setUuidCode] = useState("");
     const [languageName, setLanguageName] = useState("");
     const [textAnalyze, setTextAnalyze] = useState("");
 
@@ -28,67 +27,7 @@ function Analysis() {
             .catch((err) => console.error("Error fetching languages:", err));
     }, []);
 
-    // const SaveHandler = async () => {
-    //     if (!imageFile) {
-    //         toast.error("No file selected");
-    //         return;
-    //     }
-
-    //     if (!selectedLanguage) {           
-    //         toast.error("No language selected");
-    //         return;
-    //     }
-    //     setLanguageName(selectedLanguage)
-    //     console.log(languageName)
-
-
-    //     const formData = new FormData();
-    //     formData.append("imageFile", imageFile);
-    //     console.log(formData)
-    //     // formData.append("language", selectedLanguage);
-
-    //     try {
-    //         const res = await fetch("http://localhost:9090/image-analyzer/upload-image", {
-    //             method: "POST",
-    //             body: formData,
-    //             headers: {
-    //                 "Accept": "application/json",
-    //             },
-    //         });
-
-    //         if (res.ok) {
-    //             const result = await res.text();
-    //             setUuidCode(result)
-    //             console.log(uuidCode)
-    //             toast.success("Upload successful")
-
-
-    //         } else {
-    //             const error = await res.text();
-    //             console.error("Error uploading image:", error);
-    //         }
-    //     } catch (error) {            
-    //         console.error("Network error:", error);
-    //     }
-
-
-    //     const response = await fetch("http://localhost:9090/image-analyzer/analyze-image",{
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             uuidCode,
-    //             languageName,
-    //         }),
-    //         headers:{'Content-Type': 'application/json'}
-    //     })
-
-    //     const data = await response.json()
-    //     setTextAnalyze(data)
-
-
-
-
-
-    // };
+   
 
 
 
@@ -121,11 +60,9 @@ function Analysis() {
 
             if (res.ok) {
                 const result = await res.text();
-                setUuidCode(result);
-                console.log(uuidCode);
+                
                 toast.success("Upload successful");
 
-                // پس از اتمام کار res، درخواست دوم را ارسال می‌کنیم
                 const response = await fetch("http://localhost:9090/image-analyzer/analyze-image", {
                     method: "POST",
                     body: JSON.stringify({
@@ -146,29 +83,7 @@ function Analysis() {
         }
     };
 
-    // const AnalyzeHandler = async () => {
-
-    //     if(!imageFile && !selectedLanguage){
-    //         toast.error("No image or language selected.")
-
-    //     }
-
-    //     if(!uuidCode){
-    //         toast.error("Upload photo and language")
-    //     }
-
-    //     const res = await fetch("http://localhost:9090/image-analyzer/analyze-image",{
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             uuidCode,
-    //             languageName,
-    //         }),
-    //         headers:{'Content-Type': 'application/json'}
-    //     })
-
-    //     const data = await res.json()
-    //     setTextAnalyze(data)
-    // }
+   
 
     return (
         <div className="w-[80%] my-6 mx-auto bg-slate-400 flex flex-col justify-center items-center p-4">
